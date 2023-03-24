@@ -147,16 +147,16 @@ print(test_prop[:,0])
 # Create an SVR object
 svr = SVR()
 
-# Set up a parameter grid to search over
+#Set up a parameter grid to search over
 param_grid = {
-    'kernel': ['linear', 'poly', 'rbf', 'sigmoid'],
-    'C': [0.1, 1, 10, 100],
+    'kernel': [ 'rbf', 'sigmoid'],
+    'C': [1, 10,],
     'gamma': ['scale', 'auto'] + list(np.logspace(-3, 3, 7))
 }
 
 
 #GridSearchCV to find the best combination of hyperparameters
-grid_search = GridSearchCV(svr, param_grid, cv=5, scoring='neg_mean_squared_error', n_jobs=-1)
+grid_search = GridSearchCV(svr,param_grid , cv=5, scoring='neg_mean_squared_error', n_jobs=-1)
 grid_search.fit(train_fmv, train_prop[:,0])
 
 # Print the best hyperparameters
